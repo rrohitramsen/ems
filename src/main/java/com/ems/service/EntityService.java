@@ -21,9 +21,10 @@ public interface EntityService<T extends BasicEntity> {
     /**
      * Update entity
      * @param entity
+     * @param id
      * @return T
      */
-    T updateEntity(T entity);
+    T updateEntity(Long id, T entity);
 
     /**
      * Delete entity

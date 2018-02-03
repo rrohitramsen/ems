@@ -21,9 +21,9 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/entities")
 @Api(value="Entity Management System API", description="CRUD operations on Entity.")
-public class API<T extends BasicEntity> {
+public class EntityController<T extends BasicEntity> {
 
-    private static final Logger LOGGER = Logger.getLogger(API.class);
+    private static final Logger LOGGER = Logger.getLogger(EntityController.class);
 
     @Autowired
     private EntityService<T> entityService;
@@ -72,7 +72,9 @@ public class API<T extends BasicEntity> {
     public ResponseEntity<APIResponse> updateEntity(@PathVariable(value = "id") long id, @RequestBody T entity) {
 
         LOGGER.debug("Inside updateEntity with param "+entity);
-        return null;
+        T result = entityService.updateEntity(id, entity);
+        APIResponse response = new APIResponse("Entity Updated",result);
+        return new ResponseEntity<APIResponse>(response, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Delete entity with the given id.", response = APIResponse.class)
