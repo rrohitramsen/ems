@@ -42,8 +42,7 @@ public interface EntityService<T extends BasicEntity> {
 
 
     /**
-     *
-     * @param <T>
+     * Return List of Entitites of Type T.
      * @return List of type T.
      */
      List<T> getAllEntities();

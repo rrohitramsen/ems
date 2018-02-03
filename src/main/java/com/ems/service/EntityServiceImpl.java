@@ -3,12 +3,15 @@ package com.ems.service;
 import com.ems.model.BasicEntity;
 import com.ems.repository.EntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
+ * TODO
  * Created by rohitkumar on 28/01/18.
  */
+@Service
 public class EntityServiceImpl<T extends BasicEntity> implements EntityService {
 
     @Autowired
@@ -18,7 +21,6 @@ public class EntityServiceImpl<T extends BasicEntity> implements EntityService {
     @Override
     public BasicEntity createEntity(BasicEntity entity) {
 
-        entity.getClass()
         return null;
     }
 
