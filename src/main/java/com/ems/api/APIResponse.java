@@ -18,6 +18,14 @@ public class APIResponse<T> {
         this.entity = entity;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public T getEntity() {
+        return entity;
+    }
+
     @Override
     public String toString() {
         return "APIResponse{" +

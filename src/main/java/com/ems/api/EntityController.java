@@ -55,8 +55,8 @@ public class EntityController<T extends BasicEntity> {
         BasicEntity responseEntity = entityService.createEntity(entity);
         String message = "Entity"+responseEntity+" created successfully.";
         LOGGER.debug(message);
-        apiResponse = new APIResponse(message, responseEntity);
-        response = new ResponseEntity<>(apiResponse, HttpStatus.OK);
+        apiResponse = new APIResponse("Entity created successfully", responseEntity);
+        response = new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
         return response;
     }
 
