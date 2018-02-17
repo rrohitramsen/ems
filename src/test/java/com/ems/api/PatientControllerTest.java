@@ -55,8 +55,8 @@ public class PatientControllerTest {
         String createPatientJson = FileUtils.readFileIntoJson(Patient.class, "create_patient.json");
         Patient patient = FileUtils.readObjectFromJsonFile(Patient.class, "create_patient.json");
 
-        APIResponse apiResponse = new APIResponse("Entity created successfully", patient);
-        ResponseEntity expectedResponse = new ResponseEntity<APIResponse>(apiResponse, HttpStatus.CREATED);
+        String message = "Entity created successfully.";
+        APIResponse<Patient>  apiResponse = new APIResponse(message,  HttpStatus.CREATED.value(), patient);        ResponseEntity expectedResponse = new ResponseEntity<APIResponse>(apiResponse, HttpStatus.CREATED);
         Mockito.when(patientService.createEntity(any())).thenReturn(patient);
 
         this.mockMvc.perform(post("/patients")

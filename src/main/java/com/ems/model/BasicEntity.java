@@ -10,7 +10,7 @@ import java.util.Date;
  * Created by rohitkumar on 28/01/18.
  */
 @Entity
-public class BasicEntity implements Serializable {
+public abstract class BasicEntity implements Serializable {
 
     static final long serialVersionUID = 1L;
 

@@ -13,7 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+
 
 /**
  * Created by rohitkumar on 28/01/18.
@@ -40,24 +43,11 @@ public class EntityController<T extends BasicEntity> {
     public ResponseEntity<APIResponse> createEntity(@RequestBody T entity) {
 
         LOGGER.debug("Inside createEntity with param "+entity);
-
-        APIResponse<T> apiResponse;
-        ResponseEntity<APIResponse> response;
-
-        if (Objects.isNull(entity)) {
-            String message = "Entity is null, Please provide valid value";
-            LOGGER.debug(message);
-            apiResponse = new APIResponse(message, entity);
-            response = new ResponseEntity<>(apiResponse, HttpStatus.BAD_REQUEST);
-            return response;
-        }
-
-        BasicEntity responseEntity = entityService.createEntity(entity);
-        String message = "Entity"+responseEntity+" created successfully.";
+        T responseEntity = entityService.createEntity(entity);
+        String message = "Entity created successfully.";
+        APIResponse<T>  apiResponse = new APIResponse(message,  HttpStatus.CREATED.value(), responseEntity);
         LOGGER.debug(message);
-        apiResponse = new APIResponse("Entity created successfully", responseEntity);
-        response = new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
-        return response;
+        return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 
     @ApiOperation(value = "Update entity with the given id.", response = APIResponse.class)
@@ -72,9 +62,42 @@ public class EntityController<T extends BasicEntity> {
     public ResponseEntity<APIResponse> updateEntity(@PathVariable(value = "id") long id, @RequestBody T entity) {
 
         LOGGER.debug("Inside updateEntity with param "+entity);
-        T result = entityService.updateEntity(id, entity);
-        APIResponse response = new APIResponse("Entity Updated",result);
-        return new ResponseEntity<APIResponse>(response, HttpStatus.OK);
+        T responseEntity = entityService.updateEntity(id, entity);
+        String message;
+        if (Objects.isNull(responseEntity)) {
+            message = "Entity with id "+id+" not found in the database.";
+            LOGGER.debug(message);
+            APIResponse response = new APIResponse<>(message, HttpStatus.BAD_REQUEST.value(), message);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
+        message = "Entity Updated successfully.";
+        APIResponse response = new APIResponse(message, HttpStatus.OK.value(), responseEntity);
+        LOGGER.debug(message);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Partial update entity with the given id and the updates.", response = APIResponse.class)
+    @RequestMapping(value = "{id}", method = RequestMethod.PATCH, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = APIResponse.class),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 401, message = "Unauthorized"),
+            @ApiResponse(code = 403, message = "Forbidden"),
+            @ApiResponse(code = 404, message = "Not Found"),
+            @ApiResponse(code = 500, message = "Failure")})
+    public ResponseEntity<APIResponse> updatePartialEntity(@PathVariable(value = "id") long id, @RequestBody Map<String, Object> updates) {
+
+        LOGGER.debug("Inside updatePartialEntity with id "+id+" and updates "+updates);
+        T responseEntity = entityService.partiallyUpdateEntity(id, updates);
+        if (Objects.isNull(responseEntity)) {
+            String message = "Entity with id "+id+" not found in the database.";
+            LOGGER.debug(message);
+            APIResponse response = new APIResponse<>(message, HttpStatus.BAD_REQUEST.value(), message);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        APIResponse response = new APIResponse("Entity partially updated", HttpStatus.OK.value(), responseEntity);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Delete entity with the given id.", response = APIResponse.class)
@@ -89,7 +112,10 @@ public class EntityController<T extends BasicEntity> {
     public ResponseEntity<APIResponse> deleteEntity(@PathVariable(value = "id") long id) {
 
         LOGGER.debug("Inside deleteEntity with param "+id);
-        return null;
+        entityService.deleteEntity(id);
+        String message = "Entity deleted successfully";
+        APIResponse response = new APIResponse(message, HttpStatus.OK.value(), message);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Display entity with the given id.", response = APIResponse.class)
@@ -104,7 +130,18 @@ public class EntityController<T extends BasicEntity> {
     public ResponseEntity<APIResponse> displayEntity(@PathVariable(value = "id") long id) {
 
         LOGGER.debug("Inside displayEntity with param "+id);
-        return null;
+        T responseEntity = entityService.getEntity(id);
+
+        if (Objects.isNull(responseEntity)) {
+            String message = "Entity with id "+id+" not found in the database.";
+            LOGGER.debug(message);
+            APIResponse response = new APIResponse<>(message, HttpStatus.BAD_REQUEST.value(), message);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        String message = "Entity "+responseEntity +" retrieved successfully.";
+        LOGGER.debug(message);
+        APIResponse response = new APIResponse<>(message, HttpStatus.OK.value(), responseEntity);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @ApiOperation(value = "List all entities.", response = APIResponse.class)
@@ -118,8 +155,19 @@ public class EntityController<T extends BasicEntity> {
             @ApiResponse(code = 500, message = "Failure")})
     public ResponseEntity<APIResponse> displayAllEntity() {
 
-        LOGGER.debug("Inside displayAllEntity with param ");
-        return null;
+        LOGGER.debug("Inside displayEntity all entity");
+        List<T> responseEntity = entityService.getAllEntities();
+
+        if (Objects.isNull(responseEntity) || responseEntity.isEmpty()) {
+            String message = "Entity not found in the database.";
+            LOGGER.debug(message);
+            APIResponse response = new APIResponse<>(message, HttpStatus.BAD_REQUEST.value(), message);
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        String message = "Entity "+responseEntity +" retrieved successfully.";
+        LOGGER.debug(message);
+        APIResponse response = new APIResponse<>(message, HttpStatus.OK.value(), responseEntity);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

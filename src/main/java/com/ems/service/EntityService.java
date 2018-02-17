@@ -4,6 +4,7 @@ import com.ems.model.BasicEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rohitkumar on 28/01/18.
@@ -25,6 +26,13 @@ public interface EntityService<T extends BasicEntity> {
      * @return T
      */
     T updateEntity(Long id, T entity);
+
+    /**
+     * Partially Update the entity using patch.
+     * @param id
+     * @return T
+     */
+    T partiallyUpdateEntity(Long id, Map<String, Object> updates);
 
     /**
      * Delete entity

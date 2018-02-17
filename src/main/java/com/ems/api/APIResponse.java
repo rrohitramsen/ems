@@ -10,16 +10,25 @@ public class APIResponse<T> {
     @ApiModelProperty(notes = "API Response message.")
     private final String message;
 
-    @ApiModelProperty(notes = "Entity")
-    private final T entity;
-
-    public APIResponse(String message, T entity) {
+    public APIResponse(String message, int returnCode, T entity) {
         this.message = message;
+        this.returnCode = returnCode;
         this.entity = entity;
     }
 
+    @ApiModelProperty(notes = "API Response return code.")
+    private final int returnCode;
+
+    @ApiModelProperty(notes = "Entity")
+    private final T entity;
+
+
     public String getMessage() {
         return message;
+    }
+
+    public int getReturnCode() {
+        return returnCode;
     }
 
     public T getEntity() {

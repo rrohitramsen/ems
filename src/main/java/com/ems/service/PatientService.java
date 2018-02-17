@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rohitkumar on 03/02/18.
@@ -21,17 +22,19 @@ public class PatientService implements EntityService<Patient> {
     @Autowired
     private PatientRepository patientRepository;
 
+
     @Override
     public Patient createEntity(Patient entity) {
-
-        Patient patient = patientRepository.save(entity);
-        LOGGER.info(patient + " stored in data base successfully.");
-
-        return patient;
+        return null;
     }
 
     @Override
     public Patient updateEntity(Long id, Patient entity) {
+        return null;
+    }
+
+    @Override
+    public Patient partiallyUpdateEntity(Long id, Map<String, Object> updates) {
         return null;
     }
 

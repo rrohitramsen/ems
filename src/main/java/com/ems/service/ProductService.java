@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by rohitkumar on 03/02/18.
@@ -23,13 +24,10 @@ public class ProductService implements EntityService<Product> {
     @Autowired
     private ProductRepository productRepository;
 
+
     @Override
     public Product createEntity(Product entity) {
-
-        Product product = productRepository.save(entity);
-        LOGGER.info(product + " stored in data base successfully.");
-
-        return product;
+        return null;
     }
 
     @Override
@@ -38,17 +36,22 @@ public class ProductService implements EntityService<Product> {
     }
 
     @Override
+    public Product partiallyUpdateEntity(Long id, Map<String, Object> updates) {
+        return null;
+    }
+
+    @Override
     public void deleteEntity(Long id) {
-        productRepository.delete(id);
+
     }
 
     @Override
     public Product getEntity(Long id) {
-        return productRepository.findOne(id);
+        return null;
     }
 
     @Override
     public List<Product> getAllEntities() {
-        return productRepository.findAll();
+        return null;
     }
 }
