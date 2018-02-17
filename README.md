@@ -68,7 +68,7 @@ public class EntityController<T extends BasicEntity>
     }
 
 ```
-![create_entity](../src/main/resources/images/create_entity.png "create_entity")
+![create_entity](/src/main/resources/images/create_entity.png "create_entity")
 
 ### Update Entity using Http Put
 
@@ -100,7 +100,7 @@ public class EntityController<T extends BasicEntity>
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 ```
-![update_entity](../src/main/resources/images/update_entity.png "update_entity")
+![update_entity](/src/main/resources/images/update_entity.png "update_entity")
 
 
 ### Partial Update Entity using Http Patch
@@ -129,7 +129,7 @@ public class EntityController<T extends BasicEntity>
          return new ResponseEntity<>(response, HttpStatus.OK);
      }
 ```
-![partial_update_entity](../src/main/resources/images/partial_update_entity.png "partial_update_entity")
+![partial_update_entity](/src/main/resources/images/partial_update_entity.png "partial_update_entity")
 
 
 ### Delete Entity using Http Delete
@@ -153,7 +153,7 @@ public class EntityController<T extends BasicEntity>
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 ```
-![delete_entity](../src/main/resources/images/delete_entity.png "delete_entity")
+![delete_entity](/src/main/resources/images/delete_entity.png "delete_entity")
 
 
 ### Get Entity using Http Get
@@ -186,7 +186,7 @@ public class EntityController<T extends BasicEntity>
     }
 
 ```
-![get_entity](../src/main/resources/images/get_entity.png "get_entity")
+![get_entity](/src/main/resources/images/get_entity.png "get_entity")
 
 
 ### Get All Entity using Http Get
@@ -218,7 +218,7 @@ public class EntityController<T extends BasicEntity>
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 ```
-![get_all_entity](../src/main/resources/images/get_all_entities.png "get_all_entity")
+![get_all_entity](/src/main/resources/images/get_all_entities.png "get_all_entity")
 
 ### How to create new entities
 
@@ -270,10 +270,10 @@ public class PatientController extends EntityController<Patient> {
 ```
 
 ## Now complete, Your Patient Rest API with all the rest api end points are ready.
-![entity_swagger](../src/main/resources/images/entity_swagger.png "entity_swagger")
-![patient_swagger](../src/main/resources/images/patient_swagger.png "patient_swagger")
-![product_swagger](../src/main/resources/images/product_swagger.png "product_swagger")
-![model_swagger](../src/main/resources/images/model_swagger.png "model_swagger")
+![entity_swagger](/src/main/resources/images/entity_swagger.png "entity_swagger")
+![patient_swagger](/src/main/resources/images/patient_swagger.png "patient_swagger")
+![product_swagger](/src/main/resources/images/product_swagger.png "product_swagger")
+![model_swagger](/src/main/resources/images/model_swagger.png "model_swagger")
 
 
 
