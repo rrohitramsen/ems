@@ -8,6 +8,11 @@ The system should allow for the following capabilities:
 1.	It should be able to adapt to any kind of entity with minimal code changes
 2.	Adding, removing, modifying the attributes of an entity should be simple
 
+## Benifits
+1. Reduce developement effort by 60% becuase the developer only need to give service implmenetation. Rest of controller, log, swagger docs, workflow will be take care by the framework.
+2. Enforces rest best practices.
+
+
 
 
 ## Basic Entity
