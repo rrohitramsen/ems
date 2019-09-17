@@ -1,4 +1,4 @@
-# Generic entity management systrem rest API end points supporting POST, GET, PUT, PATCH, DELETE.
+# Generic entity management system rest API end points supporting POST, GET, PUT, PATCH, DELETE.
 
 ## Requirement
 Create a simple entity management system that provides a REST endpoint to manage any entity (e.g. a product in a catalog, patient information in healthcare etc.).
